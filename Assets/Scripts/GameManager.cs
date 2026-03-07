@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     GameObject lossScreen;
+    [SerializeField]
+    GameObject victoryScreen;
 
-    bool isGameLost = false;
+    bool isGameFinished = false;
 
     [SerializeField]
     float duration;
@@ -20,18 +22,32 @@ public class GameManager : MonoBehaviour
 
     public void OnGameLoss()
     {
-        if (isGameLost)
+        if (isGameFinished)
         {
             return;
         }
 
-        isGameLost = true;
-
-        Debug.Log("Game Is Lost");
+        isGameFinished = true;
 
         playerObject.GetComponent<PlayerInput>().DisableInput();
 
         lossScreen.SetActive(true);
+
+        StartCoroutine(ChangeBlackScreenAlpha(0.0f, 1.0f, duration));
+    }
+
+    public void OnGameWin()
+    {
+        if (isGameFinished)
+        {
+            return;
+        }
+
+        isGameFinished = true;
+
+        playerObject.GetComponent<PlayerInput>().DisableInput();
+
+        victoryScreen.SetActive(true);
 
         StartCoroutine(ChangeBlackScreenAlpha(0.0f, 1.0f, duration));
     }
@@ -57,6 +73,11 @@ public class GameManager : MonoBehaviour
     }
 
     void ReloadLevel()
+    {
+
+    }
+
+    void ReturnToMenu()
     {
 
     }
