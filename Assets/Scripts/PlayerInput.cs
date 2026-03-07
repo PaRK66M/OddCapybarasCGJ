@@ -19,8 +19,7 @@ public class PlayerInput : MonoBehaviour
         EnableInput();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisableInput()
     {
         _playerInputActions.Movement.Disable();
         _playerInputActions.Actions.Disable();
