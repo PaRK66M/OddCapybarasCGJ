@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc5de36100608f44a6381f63a842972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldManager
-  maxSwapAmount: 0
+  maxSwapAmount: 5
   swapScript: {fileID: 86252808}
   oldWorldObjects: {fileID: 651023171}
   newWorldObjects: {fileID: 1280523094}

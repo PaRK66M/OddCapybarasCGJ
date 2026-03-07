@@ -78,7 +78,7 @@ public class WorldManager : MonoBehaviour
         oldWorldObjects.SetActive(!isInNewWorld);
         oldCounterImage.SetActive(!isInNewWorld);
         newWorldObjects.SetActive(isInNewWorld);
-        newCounterImage.SetActive(!isInNewWorld);
+        newCounterImage.SetActive(isInNewWorld);
         if (isInNewWorld)
         {
             swapScript.SwapToNew();
