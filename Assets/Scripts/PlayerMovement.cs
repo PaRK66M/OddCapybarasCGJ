@@ -18,8 +18,10 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 movementInputValue = Vector2.zero;
     Vector2 turningInputValue = Vector2.zero;
+    bool jumpInputValue = false;
 
     bool isGrounded = false;
+    bool canJump;
 
     float yaw;
     float pitch;
@@ -56,20 +58,62 @@ public class PlayerMovement : MonoBehaviour
 
         // GroundCheck
         isGrounded = Physics.Raycast(transform.position, Vector3.down, headPosition.localPosition.y, tempPlayerData.groundLayer);
-
     }
 
     private void FixedUpdate()
     {
-
-        Vector3 movemenetValue =
-            (flattenedRightFacingVector * movementInputValue.x * tempPlayerData.movementSpeed.x)
-            + (flattenedFacingDirection * movementInputValue.y * tempPlayerData.movementSpeed.y);
-
-        rigidbodyComponent.linearVelocity = new Vector3(movemenetValue.x, rigidbodyComponent.linearVelocity.y, movemenetValue.z);
+        HandleMovement();
+        HandleJumping();
     }
 
+    private void HandleMovement()
+    {
+        rigidbodyComponent.linearDamping = isGrounded ?
+            tempPlayerData.groundDrag :
+            1.0f;
 
+
+        Vector3 movementDirection =
+            (flattenedRightFacingVector * movementInputValue.x)
+            + (flattenedFacingDirection * movementInputValue.y);
+
+        float speedValue = isGrounded ?
+            tempPlayerData.movementSpeed :
+            tempPlayerData.movementSpeed * tempPlayerData.airMultiplier;
+        rigidbodyComponent.AddForce(movementDirection * speedValue,
+            ForceMode.Force);
+
+        Vector3 directionalVelocity = new Vector3(rigidbodyComponent.linearVelocity.x,
+            0.0f,
+            rigidbodyComponent.linearVelocity.z);
+
+        if (directionalVelocity.magnitude
+            >
+            tempPlayerData.movementSpeed)
+        {
+            rigidbodyComponent.linearVelocity = directionalVelocity.normalized * tempPlayerData.movementSpeed;
+        }
+    }
+
+    private void HandleJumping()
+    {
+        if (!jumpInputValue || !isGrounded)
+        {
+            return;
+        }
+
+        rigidbodyComponent.linearVelocity = new Vector3(
+            rigidbodyComponent.linearVelocity.x,
+            0.0f,
+            rigidbodyComponent.linearVelocity.z);
+
+        rigidbodyComponent.AddForce(transform.up * tempPlayerData.jumpForce, ForceMode.Impulse);
+
+        if (!tempPlayerData.holdingSpaceKeepsJumping)
+        {
+            jumpInputValue = false;
+        }
+    }
 
 
     public void UpdateMovementInput(InputAction.CallbackContext context)
@@ -80,5 +124,9 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateTurningInput(InputAction.CallbackContext context)
     {
         turningInputValue = context.ReadValue<Vector2>();
+    }
+    public void UpdateJumpingInput(InputAction.CallbackContext context)
+    {
+        jumpInputValue = context.ReadValue<bool>();
     }
 }

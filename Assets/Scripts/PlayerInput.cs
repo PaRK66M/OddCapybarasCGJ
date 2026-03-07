@@ -22,7 +22,17 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        _playerInputActions.Movement.Disable();
+        _playerInputActions.Actions.Disable();
+
+        _playerInputActions.Movement.Walking.performed -= playerMovement.UpdateMovementInput;
+        _playerInputActions.Movement.Walking.canceled -= playerMovement.UpdateMovementInput;
+        _playerInputActions.Movement.Turning.performed -= playerMovement.UpdateTurningInput;
+        _playerInputActions.Movement.Turning.canceled -= playerMovement.UpdateTurningInput;
+        _playerInputActions.Movement.Jump.performed -= playerMovement.UpdateJumpingInput;
+        _playerInputActions.Movement.Jump.canceled -= playerMovement.UpdateJumpingInput;
+
+        _playerInputActions.Actions.SwapWorld.performed -= worldManager.SwapWorldInput;
     }
 
     public void EnableInput()
@@ -34,6 +44,8 @@ public class PlayerInput : MonoBehaviour
         _playerInputActions.Movement.Walking.canceled += playerMovement.UpdateMovementInput;
         _playerInputActions.Movement.Turning.performed += playerMovement.UpdateTurningInput;
         _playerInputActions.Movement.Turning.canceled += playerMovement.UpdateTurningInput;
+        _playerInputActions.Movement.Jump.performed += playerMovement.UpdateJumpingInput;
+        _playerInputActions.Movement.Jump.canceled += playerMovement.UpdateJumpingInput;
 
         _playerInputActions.Actions.SwapWorld.performed += worldManager.SwapWorldInput;
     }
