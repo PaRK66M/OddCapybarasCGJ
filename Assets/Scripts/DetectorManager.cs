@@ -19,13 +19,16 @@ public class DetectorManager : MonoBehaviour
 
     private float range;
 
-
+    private float detectionTime;
+    [SerializeField]
+    private float detectionLoseTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         range = detectionField.transform.localScale.x * transform.localScale.x * 0.5f;
 
+        detectionTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -48,12 +51,17 @@ public class DetectorManager : MonoBehaviour
 
     private void PatrolUpdate()
     {
-        
+        detectionTime = 0.0f;
     }
 
     private void DetectedUpdate()
     {
-        
+        detectionTime += Time.deltaTime;
+        if (detectionTime > detectionLoseTime)
+        {
+            GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameManager.OnGameLoss();
+        }
     }
 
     private void OnDrawGizmos()
