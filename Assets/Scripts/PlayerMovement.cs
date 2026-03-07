@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     bool jumpInputValue = false;
 
     bool isGrounded = false;
-    bool canJump;
+    bool canJump = true;
 
     float yaw;
     float pitch;
@@ -57,7 +57,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // GroundCheck
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, headPosition.localPosition.y, tempPlayerData.groundLayer);
+        isGrounded = Physics.Raycast(
+            headPosition.position, 
+            Vector3.down, 
+            headPosition.transform.localPosition.y + tempPlayerData.groundCheckDistance, 
+            tempPlayerData.groundLayer);
     }
 
     private void FixedUpdate()
@@ -70,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbodyComponent.linearDamping = isGrounded ?
             tempPlayerData.groundDrag :
-            1.0f;
+            tempPlayerData.airDrag;
 
 
         Vector3 movementDirection =
@@ -80,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         float speedValue = isGrounded ?
             tempPlayerData.movementSpeed :
             tempPlayerData.movementSpeed * tempPlayerData.airMultiplier;
+
         rigidbodyComponent.AddForce(movementDirection * speedValue,
             ForceMode.Force);
 
@@ -87,20 +92,32 @@ public class PlayerMovement : MonoBehaviour
             0.0f,
             rigidbodyComponent.linearVelocity.z);
 
+        // Ground speed seems fine with drag, it's the air speed that is an issue
         if (directionalVelocity.magnitude
             >
-            tempPlayerData.movementSpeed)
+            (isGrounded ?
+                tempPlayerData.maxGroundSpeed :
+                tempPlayerData.maxAirSpeed))
         {
-            rigidbodyComponent.linearVelocity = directionalVelocity.normalized * tempPlayerData.movementSpeed;
+            rigidbodyComponent.linearVelocity = new Vector3(0.0f, rigidbodyComponent.linearVelocity.y, 0.0f) 
+                + 
+                (directionalVelocity.normalized 
+                * (isGrounded ?
+                tempPlayerData.maxGroundSpeed :
+                tempPlayerData.maxAirSpeed));
         }
     }
 
     private void HandleJumping()
     {
-        if (!jumpInputValue || !isGrounded)
+        if (!jumpInputValue || !isGrounded || !canJump)
         {
             return;
         }
+
+        canJump = false;
+
+        Invoke("ResetJump", tempPlayerData.jumpCooldown);
 
         rigidbodyComponent.linearVelocity = new Vector3(
             rigidbodyComponent.linearVelocity.x,
@@ -115,6 +132,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void ResetJump()
+    {
+        canJump = true;
+    }
+
 
     public void UpdateMovementInput(InputAction.CallbackContext context)
     {
@@ -127,6 +149,11 @@ public class PlayerMovement : MonoBehaviour
     }
     public void UpdateJumpingInput(InputAction.CallbackContext context)
     {
-        jumpInputValue = context.ReadValue<bool>();
+        jumpInputValue = context.performed;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(headPosition.transform.position, headPosition.transform.position + Vector3.down * (headPosition.transform.localPosition.y + tempPlayerData.groundCheckDistance));
     }
 }
