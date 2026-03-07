@@ -28,6 +28,8 @@ public class PlayerInput : MonoBehaviour
         _playerInputActions.Movement.Walking.canceled -= playerMovement.UpdateMovementInput;
         _playerInputActions.Movement.Turning.performed -= playerMovement.UpdateTurningInput;
         _playerInputActions.Movement.Turning.canceled -= playerMovement.UpdateTurningInput;
+        _playerInputActions.Movement.Jump.performed -= playerMovement.UpdateJumpingInput;
+        _playerInputActions.Movement.Jump.canceled -= playerMovement.UpdateJumpingInput;
 
         _playerInputActions.Actions.SwapWorld.performed -= worldManager.SwapWorldInput;
     }
@@ -41,6 +43,8 @@ public class PlayerInput : MonoBehaviour
         _playerInputActions.Movement.Walking.canceled += playerMovement.UpdateMovementInput;
         _playerInputActions.Movement.Turning.performed += playerMovement.UpdateTurningInput;
         _playerInputActions.Movement.Turning.canceled += playerMovement.UpdateTurningInput;
+        _playerInputActions.Movement.Jump.performed += playerMovement.UpdateJumpingInput;
+        _playerInputActions.Movement.Jump.canceled += playerMovement.UpdateJumpingInput;
 
         _playerInputActions.Actions.SwapWorld.performed += worldManager.SwapWorldInput;
     }

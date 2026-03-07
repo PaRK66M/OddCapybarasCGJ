@@ -14,5 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   lookingTargetDistance: 10
   turningSpeed: {x: 100, y: 100}
-  movementSpeed: {x: 10, y: 10}
+  movementSpeed: 80
+  maxGroundSpeed: 140
+  maxAirSpeed: 120
   gimbalLockClamp: 85
+  groundCheckDistance: 0.05
+  groundDrag: 4
+  airDrag: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  jumpForce: 16
+  jumpCooldown: 0.25
+  airMultiplier: 0.05
+  holdingSpaceKeepsJumping: 0
