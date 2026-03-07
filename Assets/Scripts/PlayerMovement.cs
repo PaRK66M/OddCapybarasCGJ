@@ -18,8 +18,10 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 movementInputValue = Vector2.zero;
     Vector2 turningInputValue = Vector2.zero;
+    bool jumpInputValue = false;
 
     bool isGrounded = false;
+    bool canJump = true;
 
     float yaw;
     float pitch;
@@ -55,21 +57,85 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // GroundCheck
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, headPosition.localPosition.y, tempPlayerData.groundLayer);
-
+        isGrounded = Physics.Raycast(
+            headPosition.position, 
+            Vector3.down, 
+            headPosition.transform.localPosition.y + tempPlayerData.groundCheckDistance, 
+            tempPlayerData.groundLayer);
     }
 
     private void FixedUpdate()
     {
-
-        Vector3 movemenetValue =
-            (flattenedRightFacingVector * movementInputValue.x * tempPlayerData.movementSpeed.x)
-            + (flattenedFacingDirection * movementInputValue.y * tempPlayerData.movementSpeed.y);
-
-        rigidbodyComponent.linearVelocity = new Vector3(movemenetValue.x, rigidbodyComponent.linearVelocity.y, movemenetValue.z);
+        HandleMovement();
+        HandleJumping();
     }
 
+    private void HandleMovement()
+    {
+        rigidbodyComponent.linearDamping = isGrounded ?
+            tempPlayerData.groundDrag :
+            tempPlayerData.airDrag;
 
+
+        Vector3 movementDirection =
+            (flattenedRightFacingVector * movementInputValue.x)
+            + (flattenedFacingDirection * movementInputValue.y);
+
+        float speedValue = isGrounded ?
+            tempPlayerData.movementSpeed :
+            tempPlayerData.movementSpeed * tempPlayerData.airMultiplier;
+
+        rigidbodyComponent.AddForce(movementDirection * speedValue,
+            ForceMode.Force);
+
+        Vector3 directionalVelocity = new Vector3(rigidbodyComponent.linearVelocity.x,
+            0.0f,
+            rigidbodyComponent.linearVelocity.z);
+
+        // Ground speed seems fine with drag, it's the air speed that is an issue
+        if (directionalVelocity.magnitude
+            >
+            (isGrounded ?
+                tempPlayerData.maxGroundSpeed :
+                tempPlayerData.maxAirSpeed))
+        {
+            rigidbodyComponent.linearVelocity = new Vector3(0.0f, rigidbodyComponent.linearVelocity.y, 0.0f) 
+                + 
+                (directionalVelocity.normalized 
+                * (isGrounded ?
+                tempPlayerData.maxGroundSpeed :
+                tempPlayerData.maxAirSpeed));
+        }
+    }
+
+    private void HandleJumping()
+    {
+        if (!jumpInputValue || !isGrounded || !canJump)
+        {
+            return;
+        }
+
+        canJump = false;
+
+        Invoke("ResetJump", tempPlayerData.jumpCooldown);
+
+        rigidbodyComponent.linearVelocity = new Vector3(
+            rigidbodyComponent.linearVelocity.x,
+            0.0f,
+            rigidbodyComponent.linearVelocity.z);
+
+        rigidbodyComponent.AddForce(transform.up * tempPlayerData.jumpForce, ForceMode.Impulse);
+
+        if (!tempPlayerData.holdingSpaceKeepsJumping)
+        {
+            jumpInputValue = false;
+        }
+    }
+
+    private void ResetJump()
+    {
+        canJump = true;
+    }
 
 
     public void UpdateMovementInput(InputAction.CallbackContext context)
@@ -80,5 +146,14 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateTurningInput(InputAction.CallbackContext context)
     {
         turningInputValue = context.ReadValue<Vector2>();
+    }
+    public void UpdateJumpingInput(InputAction.CallbackContext context)
+    {
+        jumpInputValue = context.performed;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(headPosition.transform.position, headPosition.transform.position + Vector3.down * (headPosition.transform.localPosition.y + tempPlayerData.groundCheckDistance));
     }
 }
