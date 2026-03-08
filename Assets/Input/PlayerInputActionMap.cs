@@ -212,6 +212,15 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""49621103-21f4-4574-bf79-260e0e16d012"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -223,6 +232,17 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwapWorld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a59d122-6245-4b9f-a6ab-f5eba977c6b8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -239,6 +259,7 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_SwapWorld = m_Actions.FindAction("SwapWorld", throwIfNotFound: true);
+        m_Actions_PauseGame = m_Actions.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     ~@PlayerInputActionMap()
@@ -439,6 +460,7 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Actions;
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
     private readonly InputAction m_Actions_SwapWorld;
+    private readonly InputAction m_Actions_PauseGame;
     /// <summary>
     /// Provides access to input actions defined in input action map "Actions".
     /// </summary>
@@ -454,6 +476,10 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Actions/SwapWorld".
         /// </summary>
         public InputAction @SwapWorld => m_Wrapper.m_Actions_SwapWorld;
+        /// <summary>
+        /// Provides access to the underlying input action "Actions/PauseGame".
+        /// </summary>
+        public InputAction @PauseGame => m_Wrapper.m_Actions_PauseGame;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -483,6 +509,9 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
             @SwapWorld.started += instance.OnSwapWorld;
             @SwapWorld.performed += instance.OnSwapWorld;
             @SwapWorld.canceled += instance.OnSwapWorld;
+            @PauseGame.started += instance.OnPauseGame;
+            @PauseGame.performed += instance.OnPauseGame;
+            @PauseGame.canceled += instance.OnPauseGame;
         }
 
         /// <summary>
@@ -497,6 +526,9 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
             @SwapWorld.started -= instance.OnSwapWorld;
             @SwapWorld.performed -= instance.OnSwapWorld;
             @SwapWorld.canceled -= instance.OnSwapWorld;
+            @PauseGame.started -= instance.OnPauseGame;
+            @PauseGame.performed -= instance.OnPauseGame;
+            @PauseGame.canceled -= instance.OnPauseGame;
         }
 
         /// <summary>
@@ -573,5 +605,12 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwapWorld(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseGame" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }
