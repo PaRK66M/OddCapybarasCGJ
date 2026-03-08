@@ -24,7 +24,11 @@ public class PlayerInput : MonoBehaviour
     public void DisableInput(bool isPaused = false)
     {
         _playerInputActions.Movement.Disable();
-        _playerInputActions.Actions.Disable();
+        if (!isPaused)
+        {
+            _playerInputActions.Actions.Disable();
+            _playerInputActions.Actions.PauseGame.performed -= gameManager.PauseGameInput;
+        }
 
         _playerInputActions.Movement.Walking.performed -= playerMovement.UpdateMovementInput;
         _playerInputActions.Movement.Walking.canceled -= playerMovement.UpdateMovementInput;
@@ -35,16 +39,17 @@ public class PlayerInput : MonoBehaviour
 
         _playerInputActions.Actions.SwapWorld.performed -= worldManager.SwapWorldInput;
 
-        if (!isPaused)
-        {
-            _playerInputActions.Actions.PauseGame.performed -= gameManager.PauseGameInput;
-        }
+        
     }
 
     public void EnableInput(bool isPaused = false)
     {
         _playerInputActions.Movement.Enable();
-        _playerInputActions.Actions.Enable();
+        if (!isPaused)
+        {
+            _playerInputActions.Actions.Enable();
+            _playerInputActions.Actions.PauseGame.performed += gameManager.PauseGameInput;
+        }
 
         _playerInputActions.Movement.Walking.performed += playerMovement.UpdateMovementInput;
         _playerInputActions.Movement.Walking.canceled += playerMovement.UpdateMovementInput;
@@ -55,9 +60,6 @@ public class PlayerInput : MonoBehaviour
 
         _playerInputActions.Actions.SwapWorld.performed += worldManager.SwapWorldInput;
 
-        if (!isPaused)
-        {
-            _playerInputActions.Actions.PauseGame.performed += gameManager.PauseGameInput;
-        }
+        
     }
 }
