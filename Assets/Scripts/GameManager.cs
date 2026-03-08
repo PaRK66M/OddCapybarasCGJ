@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Image _blackScreen;
 
+    [SerializeField]
+    private GameObject pauseMenu;
+    private bool isPaused;
+
+    [SerializeField]
+    private PlayerInput playerInput;
+    [SerializeField]
+    private LevelLoader levelLoader;
+
+
     public void OnGameLoss()
     {
         if (isGameFinished)
@@ -34,6 +45,7 @@ public class GameManager : MonoBehaviour
         lossScreen.SetActive(true);
 
         StartCoroutine(ChangeBlackScreenAlpha(0.0f, 1.0f, duration));
+        Invoke("ReloadLevel", duration);
     }
 
     public void OnGameWin()
@@ -50,6 +62,8 @@ public class GameManager : MonoBehaviour
         victoryScreen.SetActive(true);
 
         StartCoroutine(ChangeBlackScreenAlpha(0.0f, 1.0f, duration));
+
+        Invoke("ReturnToMenu", duration);
     }
 
     public IEnumerator ChangeBlackScreenAlpha(float start, float end, float time)
@@ -68,17 +82,37 @@ public class GameManager : MonoBehaviour
 
         screenColour.a = end;
         _blackScreen.color = screenColour;
-
-        ReloadLevel();
     }
 
     void ReloadLevel()
     {
-
+        levelLoader.LoadLevel(1);
     }
 
     void ReturnToMenu()
     {
+        levelLoader.LoadLevel(0);
+    }
 
+    public void PauseGameInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        isPaused = !isPaused;
+        pauseMenu.SetActive(isPaused);
+
+        if (isPaused)
+        {
+            playerInput.DisableInput(true);
+        }
+        else
+        {
+            playerInput.EnableInput(true);
+        }
     }
 }

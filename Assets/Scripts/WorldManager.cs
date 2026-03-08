@@ -14,8 +14,6 @@ public class WorldManager : MonoBehaviour
     [SerializeField]
     private ShaderManager shaderManager;
     [SerializeField]
-    private MaterialSwap swapScript;
-    [SerializeField]
     private float swapDuration;
     [SerializeField]
     private float swapSpeed;
@@ -92,14 +90,6 @@ public class WorldManager : MonoBehaviour
         oldCounterImage.SetActive(!isInNewWorld);
         newWorldObjects.SetActive(isInNewWorld);
         newCounterImage.SetActive(isInNewWorld);
-        if (isInNewWorld)
-        {
-            swapScript.SwapToNew();
-        }
-        else
-        {
-            swapScript.SwapToOld();
-        }
 
         counterText.text = currentSwapAmount.ToString();
     }

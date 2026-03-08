@@ -43,12 +43,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _BlendMax: 0
-    - _BlendMin: 0
+    - _BlendMin: -10
     - _QueueControl: 0
     - _QueueOffset: 0
     - _isOutsideTexture: 0
     m_Colors:
-    - _PlayerPosition: {r: 45.105843, g: 0.7050495, b: -2.9609132, a: 0}
+    - _PlayerPosition: {r: 31.67862, g: 0.7050495, b: 2.6111794, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7832432960184351448
