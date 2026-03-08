@@ -17,6 +17,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        WebGLInput.captureAllKeyboardInput = true;
+#endif
         _playerInputActions = new PlayerInputActionMap();
     }
 

@@ -13,7 +13,7 @@ public class VictoryDetection : MonoBehaviour
         if(other.tag == "Player")
         {
             treasure.SetActive(false);
-            gameManager.OnGameWin();
+            gameManager.GainKey();
         }
     }
 }

@@ -32,6 +32,17 @@ public class GameManager : MonoBehaviour
 
     private bool hasKey = false;
 
+    private float playTime;
+
+    private void Start()
+    {
+        playTime = 0.0f;
+    }
+
+    private void Update()
+    {
+        playTime += Time.deltaTime;
+    }
 
     public void OnGameLoss()
     {
@@ -52,6 +63,11 @@ public class GameManager : MonoBehaviour
 
     public void OnGameWin()
     {
+        if (!hasKey)
+        {
+            return;
+        }
+
         if (isGameFinished)
         {
             return;
@@ -64,6 +80,11 @@ public class GameManager : MonoBehaviour
         victoryScreen.SetActive(true);
 
         StartCoroutine(ChangeBlackScreenAlpha(0.0f, 1.0f, duration));
+
+        if(PlayerPrefs.GetFloat("BestTime") > playTime)
+        {
+            PlayerPrefs.SetFloat("BestTime", playTime);
+        }
 
         Invoke("ReturnToMenu", duration);
     }
