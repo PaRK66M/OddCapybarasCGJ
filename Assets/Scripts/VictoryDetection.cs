@@ -17,6 +17,7 @@ public class VictoryDetection : MonoBehaviour
         {
             treasure.SetActive(false);
             gameManager.GainKey();
+            DisplayKeyGained();
         }
     }
 
