@@ -56,7 +56,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BlendMax: 0
-    - _BlendMin: 0
+    - _BlendMin: -20
     - _QueueControl: 0
     - _QueueOffset: 0
     - _isOutsideTexture: 0
