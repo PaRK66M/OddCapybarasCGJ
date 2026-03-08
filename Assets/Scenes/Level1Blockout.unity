@@ -33682,7 +33682,26 @@ MonoBehaviour:
   worldManager: {fileID: 2018202128}
   playerPosition: {fileID: 1326626409}
   swappingMaterials:
+  - {fileID: 2100000, guid: 84941c61288fb944dbb1d7012b6cc9c5, type: 2}
+  - {fileID: 2100000, guid: cdec015f0b8e40843a760446fe4bf6dc, type: 2}
+  - {fileID: 2100000, guid: 718350d0ab0aef94aa091b2b63cd1ac4, type: 2}
+  - {fileID: 2100000, guid: c068c00ae4ca4d648b1ce261dfbf4fcf, type: 2}
+  - {fileID: 2100000, guid: 731bd13669985484980e526d5cd3422b, type: 2}
+  - {fileID: 2100000, guid: 7e4eab1b8f2c88d4082333df61b5abdc, type: 2}
+  - {fileID: 2100000, guid: bad3b56385d483c4aa5ee01cfdb3dbca, type: 2}
+  - {fileID: 2100000, guid: ac075d9b3f981ff409232d491d71d464, type: 2}
+  - {fileID: 2100000, guid: 68179e3f7ecf2754091be2fc2d933520, type: 2}
+  - {fileID: 2100000, guid: 7689e48b3a274d64d8e71da6f9e53e8c, type: 2}
+  - {fileID: 2100000, guid: a87f5f6ab02e4d04fa6b55f56541ab55, type: 2}
+  - {fileID: 2100000, guid: eb3a4a1b1f16b994f97fb126542f6ed6, type: 2}
+  - {fileID: 2100000, guid: 628752d4efd71e34fb4707885d275d51, type: 2}
+  - {fileID: 2100000, guid: 337866723218c984f836f4aa9b08e11e, type: 2}
+  - {fileID: 2100000, guid: 6d6709d54ccda5140ac22b85274cf887, type: 2}
+  - {fileID: 2100000, guid: 57d1e7bf72e56044e9a6d0dc22f6d7f8, type: 2}
+  - {fileID: 2100000, guid: 881ae0e059e08ef4da0871da72585432, type: 2}
   - {fileID: 2100000, guid: 595fca4fda61df94986bd5d0ec7aa4f6, type: 2}
+  - {fileID: 2100000, guid: 21780ef292938ce4597c911b37768821, type: 2}
+  - {fileID: 2100000, guid: 952d8044445fbdf419fb6b2b4bbea5d8, type: 2}
   oldWorldExclusiveMaterials:
   - {fileID: 2100000, guid: 01dfd47cbc24d214e851cc215fdd334b, type: 2}
   - {fileID: 2100000, guid: 74e3be46032c89c4abbd5a5ef9f1b59a, type: 2}
