@@ -10,6 +10,8 @@ public class OptionsManager : MonoBehaviour
 
     [SerializeField]
     private PlayerMovement playerMovement;
+    [SerializeField]
+    private AudioManager audioManager;
 
     private void Start()
     {
@@ -32,6 +34,10 @@ public class OptionsManager : MonoBehaviour
     public void UpdateVolume()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
+        if (audioManager != null)
+        {
+            audioManager.UpdateVolume();
+        }
     }
 
     public void UpdateMouseSensitivity()
