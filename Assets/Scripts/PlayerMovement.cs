@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     float yaw;
     float pitch;
 
+    float currentMouseSensitivity;
+
     [SerializeField]
     PlayerData tempPlayerData;
 
@@ -33,6 +35,12 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        currentMouseSensitivity = Mathf.Lerp(
+            tempPlayerData.minTurningSpeedMod,
+            tempPlayerData.maxTurningSpeedMod,
+            PlayerPrefs.GetFloat("MouseSensitivity"))
+            * tempPlayerData.turningSpeed;
     }
 
     // Update is called once per frame
@@ -41,8 +49,8 @@ public class PlayerMovement : MonoBehaviour
         // Turning
         if (turningInputValue != Vector2.zero)
         {
-            yaw += turningInputValue.x * tempPlayerData.turningSpeed.x * Time.deltaTime;
-            pitch -= turningInputValue.y * tempPlayerData.turningSpeed.y * Time.deltaTime;
+            yaw += turningInputValue.x * tempPlayerData.turningSpeed * Time.deltaTime;
+            pitch -= turningInputValue.y * tempPlayerData.turningSpeed * Time.deltaTime;
             pitch = Mathf.Clamp(pitch, -tempPlayerData.gimbalLockClamp, tempPlayerData.gimbalLockClamp);
 
             facingDirection = Quaternion.Euler(pitch, yaw, 0.0f) * Vector3.forward;
@@ -150,6 +158,15 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateJumpingInput(InputAction.CallbackContext context)
     {
         jumpInputValue = context.performed;
+    }
+
+    public void UpdateMouseSensitivity()
+    {
+        currentMouseSensitivity = Mathf.Lerp(
+            tempPlayerData.minTurningSpeedMod,
+            tempPlayerData.maxTurningSpeedMod,
+            PlayerPrefs.GetFloat("MouseSensitivity"))
+            * tempPlayerData.turningSpeed;
     }
 
     private void OnDrawGizmos()

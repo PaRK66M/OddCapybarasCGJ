@@ -4,7 +4,9 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     public float lookingTargetDistance = 10.0f; // I don't think this will change anything
-    public Vector2 turningSpeed;
+    public float turningSpeed;
+    public float maxTurningSpeedMod;
+    public float minTurningSpeedMod;
     public float movementSpeed;
     public float maxGroundSpeed;
     public float maxAirSpeed;
