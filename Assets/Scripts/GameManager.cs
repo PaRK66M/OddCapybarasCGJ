@@ -104,6 +104,10 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         isPaused = !isPaused;
+
+        Cursor.lockState = isPaused ?
+            CursorLockMode.None :
+            CursorLockMode.Locked;
         pauseMenu.SetActive(isPaused);
 
         if (isPaused)

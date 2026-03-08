@@ -110,8 +110,6 @@ public class ShaderManager : MonoBehaviour
                     -1.0f :
                     1.0f);
 
-            Debug.Log(blendMinimum);
-
             for (int i = 0; i < swappingMaterials.Length; i++)
             {
                 swappingMaterials[i].SetFloat("_BlendMin", blendMinimum);
@@ -156,6 +154,9 @@ public class ShaderManager : MonoBehaviour
             newWorldExclusiveMaterials[i].SetFloat("_BlendMin", blendMinimum);
             newWorldExclusiveMaterials[i].SetFloat("_BlendMax", blendMinimum + blendDistance);
         }
+
+
+        Debug.Log(blendMinimum);
 
         worldManager.ApplySwap();
     }
