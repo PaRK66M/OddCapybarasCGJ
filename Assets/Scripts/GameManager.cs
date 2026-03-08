@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator ChangeBlackScreenAlpha(float start, float end, float time)
     {
+        _blackScreen.enabled = true;
         float timePassed = 0.0f;
         Color screenColour = _blackScreen.color;
 
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = isPaused ?
             CursorLockMode.None :
             CursorLockMode.Locked;
+
         pauseMenu.SetActive(isPaused);
 
         if (isPaused)
