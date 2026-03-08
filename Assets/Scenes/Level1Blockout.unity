@@ -22643,6 +22643,10 @@ PrefabInstance:
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 742233285919578773, guid: 1797992a463f1c146b09e3020e333ecc, type: 3}
+      propertyPath: maxSwapAmount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 742233285919578773, guid: 1797992a463f1c146b09e3020e333ecc, type: 3}
       propertyPath: shaderManager
       value: 
       objectReference: {fileID: 1982841398}
