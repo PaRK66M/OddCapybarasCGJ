@@ -237,6 +237,17 @@ public partial class @PlayerInputActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""32d133da-458d-492f-9a68-dd216fca41e6"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWorld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8a59d122-6245-4b9f-a6ab-f5eba977c6b8"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",

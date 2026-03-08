@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class OptionsManager : MonoBehaviour
     private PlayerMovement playerMovement;
     [SerializeField]
     private AudioManager audioManager;
+
+    [SerializeField]
+    private TMP_Text bestTime;
 
     private void Start()
     {
@@ -31,6 +35,17 @@ public class OptionsManager : MonoBehaviour
         mouseSensitivitySlider.value = PlayerPrefs.GetFloat("MouseSensitivity");
 
         mouseSensitivitySlider.onValueChanged.AddListener(delegate { UpdateMouseSensitivity(); });
+
+        if (bestTime == null)
+        {
+            return;
+        }
+
+        if (!PlayerPrefs.HasKey("BestTime"))
+        {
+            PlayerPrefs.SetFloat("BestTime", 9999);
+        }
+        bestTime.text = "BEST TIME: " + PlayerPrefs.GetFloat("BestTime").ToString() + "s";
     }
 
     public void UpdateVolume()
