@@ -36,7 +36,7 @@ public class OptionsManager : MonoBehaviour
 
         mouseSensitivitySlider.onValueChanged.AddListener(delegate { UpdateMouseSensitivity(); });
 
-        if (bestTime != null)
+        if (bestTime == null)
         {
             return;
         }
