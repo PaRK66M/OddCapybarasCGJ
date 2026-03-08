@@ -12,7 +12,11 @@ public class WorldManager : MonoBehaviour
 
     [Header("Material Swap")]
     [SerializeField]
-    private MaterialSwap swapScript;
+    private ShaderManager shaderManager;
+    [SerializeField]
+    private float swapDuration;
+    [SerializeField]
+    private float swapSpeed;
 
     [SerializeField]
     private GameObject oldWorldObjects;
@@ -48,7 +52,14 @@ public class WorldManager : MonoBehaviour
 
         currentSwapAmount--;
 
-        ApplySwap();
+        oldWorldObjects.SetActive(true);
+        oldCounterImage.SetActive(true);
+        newWorldObjects.SetActive(true);
+        newCounterImage.SetActive(true);
+
+        counterText.text = currentSwapAmount.ToString();
+
+        shaderManager.SwapMaterials(swapDuration, swapSpeed);
     }
 
     public void FailedSwap()
@@ -73,20 +84,12 @@ public class WorldManager : MonoBehaviour
         ApplySwap();
     }
 
-    private void ApplySwap()
+    public void ApplySwap()
     {
         oldWorldObjects.SetActive(!isInNewWorld);
         oldCounterImage.SetActive(!isInNewWorld);
         newWorldObjects.SetActive(isInNewWorld);
         newCounterImage.SetActive(isInNewWorld);
-        if (isInNewWorld)
-        {
-            swapScript.SwapToNew();
-        }
-        else
-        {
-            swapScript.SwapToOld();
-        }
 
         counterText.text = currentSwapAmount.ToString();
     }
