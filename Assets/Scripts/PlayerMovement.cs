@@ -160,15 +160,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateMouseSensitivity()
     {
-        Debug.Log("Updating");
 
         currentMouseSensitivity = Mathf.Lerp(
             tempPlayerData.minTurningSpeedMod,
             tempPlayerData.maxTurningSpeedMod,
             PlayerPrefs.GetFloat("MouseSensitivity") / 100.0f)
             * tempPlayerData.turningSpeed;
-
-        Debug.Log(currentMouseSensitivity);
     }
 
     private void OnDrawGizmos()

@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private LevelLoader levelLoader;
 
+    private bool hasKey = false;
+
 
     public void OnGameLoss()
     {
@@ -93,6 +95,11 @@ public class GameManager : MonoBehaviour
     void ReturnToMenu()
     {
         levelLoader.LoadLevel(0);
+    }
+
+    public void GainKey()
+    {
+        hasKey = true;
     }
 
     public void PauseGameInput(InputAction.CallbackContext context)

@@ -156,7 +156,6 @@ public class ShaderManager : MonoBehaviour
         }
 
 
-        Debug.Log(blendMinimum);
 
         worldManager.ApplySwap();
     }
