@@ -34,12 +34,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
         currentMouseSensitivity = Mathf.Lerp(
             tempPlayerData.minTurningSpeedMod,
             tempPlayerData.maxTurningSpeedMod,
-            PlayerPrefs.GetFloat("MouseSensitivity"))
+            PlayerPrefs.GetFloat("MouseSensitivity") / 100.0f)
             * tempPlayerData.turningSpeed;
     }
 
@@ -49,8 +47,8 @@ public class PlayerMovement : MonoBehaviour
         // Turning
         if (turningInputValue != Vector2.zero)
         {
-            yaw += turningInputValue.x * tempPlayerData.turningSpeed * Time.deltaTime;
-            pitch -= turningInputValue.y * tempPlayerData.turningSpeed * Time.deltaTime;
+            yaw += turningInputValue.x * currentMouseSensitivity * Time.deltaTime;
+            pitch -= turningInputValue.y * currentMouseSensitivity * Time.deltaTime;
             pitch = Mathf.Clamp(pitch, -tempPlayerData.gimbalLockClamp, tempPlayerData.gimbalLockClamp);
 
             facingDirection = Quaternion.Euler(pitch, yaw, 0.0f) * Vector3.forward;
@@ -162,10 +160,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateMouseSensitivity()
     {
+
         currentMouseSensitivity = Mathf.Lerp(
             tempPlayerData.minTurningSpeedMod,
             tempPlayerData.maxTurningSpeedMod,
-            PlayerPrefs.GetFloat("MouseSensitivity"))
+            PlayerPrefs.GetFloat("MouseSensitivity") / 100.0f)
             * tempPlayerData.turningSpeed;
     }
 

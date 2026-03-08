@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private LevelLoader levelLoader;
 
+    private bool hasKey = false;
+
 
     public void OnGameLoss()
     {
@@ -95,6 +97,11 @@ public class GameManager : MonoBehaviour
         levelLoader.LoadLevel(0);
     }
 
+    public void GainKey()
+    {
+        hasKey = true;
+    }
+
     public void PauseGameInput(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
@@ -109,6 +116,10 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = isPaused ?
             CursorLockMode.None :
             CursorLockMode.Locked;
+
+        Cursor.visible = isPaused ?
+            true :
+            false;
 
         pauseMenu.SetActive(isPaused);
 

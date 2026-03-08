@@ -15,10 +15,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private GameManager gameManager;
 
-    private void OnEnable()
+    private void Start()
     {
         _playerInputActions = new PlayerInputActionMap();
-        EnableInput();
     }
 
     public void DisableInput(bool isPaused = false)
