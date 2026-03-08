@@ -34,6 +34,9 @@ public class WorldManager : MonoBehaviour
     [SerializeField]
     private GameObject newCounterImage;
 
+
+    private bool isSwappingWorlds = false;
+
     private void Start()
     {
         currentSwapAmount = maxSwapAmount;
@@ -42,12 +45,14 @@ public class WorldManager : MonoBehaviour
 
     public void SwapWorld()
     {
+        if(isSwappingWorlds) { return; }
         if (currentSwapAmount <= 0)
         {
             FailedSwap();
             return;
         }
 
+        isSwappingWorlds = true;
         isInNewWorld = !isInNewWorld;
 
         currentSwapAmount--;
@@ -92,5 +97,7 @@ public class WorldManager : MonoBehaviour
         newCounterImage.SetActive(isInNewWorld);
 
         counterText.text = currentSwapAmount.ToString();
+
+        isSwappingWorlds = false;
     }
 }
