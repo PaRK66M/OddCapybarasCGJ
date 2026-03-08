@@ -110,6 +110,10 @@ public class GameManager : MonoBehaviour
             CursorLockMode.None :
             CursorLockMode.Locked;
 
+        Cursor.visible = isPaused ?
+            true :
+            false;
+
         pauseMenu.SetActive(isPaused);
 
         if (isPaused)

@@ -26,6 +26,9 @@ public class WorldManager : MonoBehaviour
     [SerializeField]
     bool isInNewWorld = true;
 
+    [SerializeField]
+    private AudioManager audioManager;
+
     [Header("UI Elements")]
     [SerializeField]
     private TMP_Text counterText;
@@ -64,6 +67,7 @@ public class WorldManager : MonoBehaviour
 
         counterText.text = currentSwapAmount.ToString();
 
+        audioManager.SwapWorld(swapDuration);
         shaderManager.SwapMaterials(swapDuration, swapSpeed);
     }
 

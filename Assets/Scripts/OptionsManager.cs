@@ -22,13 +22,15 @@ public class OptionsManager : MonoBehaviour
         }
         volumeSlider.value = PlayerPrefs.GetFloat("Volume");
 
+        volumeSlider.onValueChanged.AddListener(delegate { UpdateVolume(); });
+
         if (!PlayerPrefs.HasKey("MouseSensitivity"))
         {
             PlayerPrefs.SetFloat("MouseSensitivity", 50.0f);
         }
         mouseSensitivitySlider.value = PlayerPrefs.GetFloat("MouseSensitivity");
 
-        mouseSensitivitySlider.onValueChanged.AddListener(delegate { UpdateVolume(); });
+        mouseSensitivitySlider.onValueChanged.AddListener(delegate { UpdateMouseSensitivity(); });
     }
 
     public void UpdateVolume()

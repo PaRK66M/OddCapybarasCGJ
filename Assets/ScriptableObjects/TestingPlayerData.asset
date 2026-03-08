@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestingPlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   lookingTargetDistance: 10
-  turningSpeed: 60
-  maxTurningSpeedMod: 0.1
-  minTurningSpeedMod: 3
+  turningSpeed: 10
+  maxTurningSpeedMod: 2
+  minTurningSpeedMod: 0.1
   movementSpeed: 80
   maxGroundSpeed: 140
   maxAirSpeed: 120
