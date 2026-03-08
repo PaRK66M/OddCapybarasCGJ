@@ -55,12 +55,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendMax: 120
-    - _BlendMin: 100
+    - _BlendMax: 0
+    - _BlendMin: -20
     - _QueueControl: 0
     - _QueueOffset: 0
     - _isOutsideTexture: 1
     m_Colors:
-    - _PlayerPosition: {r: -38.673904, g: 5.0679054, b: -10.638219, a: 0}
+    - _PlayerPosition: {r: -50.255, g: 0.3202113, b: 1.6933212e-13, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
