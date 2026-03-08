@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Photoframe1
+  m_Name: GlobeWS
   m_Shader: {fileID: -6465566751694194690, guid: 8392bc211247314478eebc4f09d9545c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _NewWorldTexture:
-        m_Texture: {fileID: 2800000, guid: def057347cae3de4894b1ac403677da6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2fd17cdb2edd93447b486d78286862b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OldWorldTexture:
-        m_Texture: {fileID: 2800000, guid: def057347cae3de4894b1ac403677da6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2fd17cdb2edd93447b486d78286862b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -51,7 +51,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _PlayerPosition: {r: -45.69253, g: 5.056842, b: -29.00169, a: 0}
+    - _PlayerPosition: {r: -38.673904, g: 5.0679054, b: -10.638219, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8421812086407269889

@@ -61,6 +61,6 @@ Material:
     - _QueueOffset: 0
     - _isOutsideTexture: 1
     m_Colors:
-    - _PlayerPosition: {r: -45.69253, g: 5.056842, b: -29.00169, a: 0}
+    - _PlayerPosition: {r: -38.673904, g: 5.0679054, b: -10.638219, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
